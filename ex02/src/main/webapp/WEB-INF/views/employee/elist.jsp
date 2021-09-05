@@ -40,7 +40,7 @@
 					<td>${employee.firstName}</td>
 					<td>${employee.lastName}</td>
 					<td>${employee.phoneNumber}</td>
-					<td><fmt:formatDate value="${employee.hireDate }" type="both"
+					<td><fmt:formatDate value="${employee.hireDate}" type="both"
 							pattern="yy-MM-dd" /></td>
 					<td>${employee.jobId}</td>
 					<td>${employee.salary}</td>

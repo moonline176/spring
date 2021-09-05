@@ -13,7 +13,7 @@ public interface BoardService {
 		public int update(BoardVO vo);
 		
 		//삭제
-		public int delete(BoardVO vo);
+		public int remove(BoardVO vo);
 		
 		//단건 조회
 		public BoardVO read(BoardVO vo);

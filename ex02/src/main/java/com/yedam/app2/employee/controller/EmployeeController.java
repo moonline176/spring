@@ -19,5 +19,7 @@ public class EmployeeController {
 	public void list(Model model) {
 		model.addAttribute("elist", employeeService.getList());
 	}
+	
+	
 
 }

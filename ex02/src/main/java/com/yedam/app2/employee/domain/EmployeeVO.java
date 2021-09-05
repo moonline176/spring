@@ -14,7 +14,7 @@ public class EmployeeVO {
 	private Date hireDate;
 	private String jobId;
 	private int salary;
-	private int commissionPct;
+	private double commissionPct;
 	private int managerId;
 	private int departmentId;
 }

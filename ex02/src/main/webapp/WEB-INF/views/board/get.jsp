@@ -1,24 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="/WEB-INF/views/includes/header.jsp"%>
-<h3>게시판</h3>
-<table border="1">
-	<tr>
-		<th>글번호</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th>입력날짜</th>
-		<th>수정날짜</th>
-	</tr>
-	<tr>
-		<td>${board.bno}</td>
-		<td>${board.title}</td>
-		<td>${board.content}</td>
-		<td><fmt:formatDate value="${board.regdate }" type="both"
-				pattern="yy-MM-dd" /></td>
-		<td><fmt:formatDate value="${board.updatedate }" type="both"
-				pattern="yy-MM-dd" /></td>
-	</tr>
-</table>
+<form role="form" action="/board/modify" method="get">
+	<div class="form-group">
+		<label>Bno</label> <input class="form-control" name="bno"
+			value="${board.bno}" readonly="readonly">
+	</div>
+</form>
+<div class="form-group">
+	<label>Title</label> <input class="form-control" name="title"
+		value="${board.title}" readonly="readonly">
+</div>
+
+<div>
+	<label>Text area</label>
+	<textarea class="form-control" name="content" rows="3"
+		readonly="readonly">${board.content}</textarea>
+</div>
+
+<div class="form-group">
+	<lable>Writer</lable>
+	<input class="form-control" name="writer" value="${board.writer}"
+		readonly="readonly">
+</div>
+
+<div class="form-group">
+	<lable>RegDate</lable>
+	<input class="form-control" name="regDate"
+		value="<fmt:formatDate pattern = "yyyy/MM/dd" value="${board.regdate}"/>"
+		readonly="readonly">
+</div>
+
+<div class="form-group">
+	<lable>Update Date</lable>
+	<input class="form-control" name="updateDate"
+		value="<fmt:formatDate pattern = "yyyy/MM/dd" value="${board.regdate}"/>"
+		readonly="readonly">
+</div>
+
+<button type="submit"
+	onclick="location.href='modify?bno=${board.bno}'"
+	class="btn btn-default">수정</button>
+<button type="submit" class="btn btn-default">목록</button>
+
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

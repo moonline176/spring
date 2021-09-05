@@ -23,7 +23,7 @@ public class BoardMapperClient {
 	@Autowired BoardService boardMapper;
 	
 	//전체조회
-	//@Test
+	@Test
 	public void getList() {
 		log.info(boardMapper.getList().toString());
 	}
@@ -39,7 +39,7 @@ public class BoardMapperClient {
 	}
 	
 	//상세(단건)조회
-	@Test
+	//@Test
 	public void read() {
 		BoardVO board = new BoardVO();
 		board.setBno(4);
@@ -52,7 +52,7 @@ public class BoardMapperClient {
 	public void delete() {
 		BoardVO board = new BoardVO();
 		board.setBno(5);
-		boardMapper.delete(board);
+		boardMapper.remove(board);
 		
 	}
 	

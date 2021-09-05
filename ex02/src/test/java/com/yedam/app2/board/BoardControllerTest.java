@@ -29,7 +29,7 @@ public class BoardControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
-	//@Test //215페이지, 목록조회
+	@Test //215페이지, 목록조회
 	public void testList() throws Exception{
 		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
 				.andReturn()
@@ -38,10 +38,9 @@ public class BoardControllerTest {
 				.toString());
 	}
 	
-	//@Test
-	//public void testGet
+
 	
-	//@Test 등록	
+	//@Test 
 	public void testRegister() throws Exception{ 
 	String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/register")
 			.param("title", "테스트 새글 제목")

@@ -37,6 +37,9 @@
 		</tbody>
 	</table>
 </div>
+<div>
+	<input type="button" class="btn btn-default" onclick="location.href='register'" value="게시글 작성"/>
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#board').DataTable();
