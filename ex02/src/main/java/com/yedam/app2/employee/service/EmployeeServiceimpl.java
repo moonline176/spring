@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yedam.app2.board.domain.Criteria;
 import com.yedam.app2.employee.domain.EmployeeVO;
 import com.yedam.app2.employee.mapper.EmployeeMapper;
 @Service
@@ -37,9 +38,15 @@ public class EmployeeServiceimpl implements EmployeeService {
 	}
 
 	@Override
-	public List<EmployeeVO> getList() {
+	public List<EmployeeVO> getList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return employeeMapper.getList();
+		return employeeMapper.getList(cri);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return employeeMapper.getTotalCount(cri);
 	}
 
 }

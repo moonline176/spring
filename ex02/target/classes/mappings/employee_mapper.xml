@@ -1,8 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.app2.employee.mapper.EmployeeMapper">
-	<select id="getList" resultType="EmployeeVO">
-		select *
-		 from employees
+	<sql id="criteria">
+		<trim prefix="(" suffix=")AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							EMPLOYEE_ID like '%' ||#{keyword} || '%'
+						</when>
+						<when test="type=='C'.toString()">
+							LAST_NAME like '%' ||#{keyword} || '%'
+						</when>
+						<when test="type=='W'.toString()">
+							DEPARTMENT_ID like '%' ||#{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM
+		EMPLOYEES
+		WHERE
+		<include refid="criteria"></include>
+		EMPLOYEE_ID > 0
 	</select>
+
+
+	<select id="getList" resultType="EmployeeVO">
+		<![CDATA[
+		SELECT
+		*
+		FROM
+		(
+		SELECT
+		/*+INDEX_DESC(EMPLOYEES EMP_EMP_ID_PK)*/
+		ROWNUM RN, 
+		EMPLOYEE_ID,
+		FIRST_NAME,
+		LAST_NAME,
+		EMAIL,
+		PHONE_NUMBER,
+		HIRE_DATE,
+		JOB_ID,
+		SALARY,
+		COMMISSION_PCT,
+		MANAGER_ID,
+		DEPARTMENT_ID
+		FROM EMPLOYEES
+		where
+		]]>
+		<include refid="criteria"></include>
+		<![CDATA[
+		ROWNUM <= #{pageNum} * #{amount} )
+		WHERE RN > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+
+	<insert id="insertEmp">
+		INSERT INTO EMPLOYEES(EMPLOYEE_ID,HIRE_DATE,JOB_ID)
+		VALUES(#{employeeId},sysdate,#{jobId})
+	</insert>
 </mapper>

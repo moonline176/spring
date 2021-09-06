@@ -31,7 +31,6 @@ public class BoardController {
 		int total = boardService.getTotalCount(cri);
 		model.addAttribute("list", boardService.getList(cri));
 		model.addAttribute("pageMaker", new PageVO(cri, total));
-
 	}
 
 	// 단건 조회(수정페이지)

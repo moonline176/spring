@@ -2,6 +2,7 @@ package com.yedam.app2.employee.service;
 
 import java.util.List;
 
+import com.yedam.app2.board.domain.Criteria;
 import com.yedam.app2.employee.domain.EmployeeVO;
 
 
@@ -20,5 +21,8 @@ public interface EmployeeService {
 		public EmployeeVO read(EmployeeVO vo);
 		
 		//전체 조회
-		public List<EmployeeVO> getList();
+		public List<EmployeeVO> getList(Criteria cri);
+		
+		//전체 게시글 수
+		public int getTotalCount(Criteria cri);
 }
