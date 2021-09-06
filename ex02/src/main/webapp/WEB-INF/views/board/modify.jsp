@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="/WEB-INF/views/includes/header.jsp"%>
-<form role="form"  method="post">
+<form role="form" method="post">
 	<div>
 		<div class="form-group">
 			<label>Bno</label> ${board.bno}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yedam.app2.board.domain.BoardVO;
+import com.yedam.app2.board.domain.Criteria;
 import com.yedam.app2.board.mapper.BoardMapper;
 
 @Service
@@ -37,9 +38,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getList() {
+	public List<BoardVO> getList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return boardMapper.getList();
+		return boardMapper.getList(cri);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return boardMapper.getTotalCount(cri);
 	}
 
 }

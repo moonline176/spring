@@ -38,10 +38,12 @@
 		value="<fmt:formatDate pattern = "yyyy/MM/dd" value="${board.regdate}"/>"
 		readonly="readonly">
 </div>
-
-<button type="submit"
-	onclick="location.href='modify?bno=${board.bno}'"
-	class="btn btn-default">수정</button>
-<button type="submit" class="btn btn-default">목록</button>
-
+<form action="modify" method="post">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+	<a type="button" href='modify?bno=${board.bno}&pageNum=${cri.pageNum}&amount=${cri.amount}'
+		class="btn btn-default">수정</a>
+	<a class="btn btn-success"
+		href="list?pageNum=${cri.pageNum}&amount=${cri.amount}">목록으로</a>
+</form>
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

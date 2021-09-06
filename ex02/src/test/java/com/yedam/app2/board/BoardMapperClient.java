@@ -3,12 +3,11 @@ package com.yedam.app2.board;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yedam.app2.board.domain.BoardVO;
-import com.yedam.app2.board.mapper.BoardMapper;
+import com.yedam.app2.board.domain.Criteria;
 import com.yedam.app2.board.service.BoardService;
 
 import lombok.extern.java.Log;
@@ -25,7 +24,10 @@ public class BoardMapperClient {
 	//전체조회
 	@Test
 	public void getList() {
-		log.info(boardMapper.getList().toString());
+		Criteria cri = new Criteria(1,20);
+		cri.setType("C");
+		cri.setKeyword("검색");
+		log.info(boardMapper.getList(cri).toString());
 	}
 	
 	//입력
