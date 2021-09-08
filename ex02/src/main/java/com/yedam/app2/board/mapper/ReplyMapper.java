@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.yedam.app2.board.domain.Criteria;
+import com.yedam.app2.board.domain.ReplyPageVO;
 import com.yedam.app2.board.domain.ReplyVO;
 
 public interface ReplyMapper {
@@ -23,4 +24,8 @@ public interface ReplyMapper {
 	
 	//삭제
 	public int deleteRe(ReplyVO vo);
+	
+	//해당 게시글의 댓글 수
+	public int getCountByBno(Long bno);
+	
 }

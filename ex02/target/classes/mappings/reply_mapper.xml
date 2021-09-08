@@ -3,8 +3,24 @@
 <mapper namespace="com.yedam.app2.board.mapper.ReplyMapper">
 	
 	<select id="getList" resultType="ReplyVO">
-		SELECT RNO, BNO,REPLY,REPLYER,REPLYDATE FROM TBL_REPLY
-		WHERE BNO = #{bno}
+		<![CDATA[
+		SELECT RNO, BNO, REPLY, REPLYER, REPLYDATE
+		FROM
+		(
+		SELECT /*+INDEX(TBL_REPLY IDX_REPLY) */
+			ROWNUM RN, RNO, BNO, REPLY, REPLYER, REPLYDATE, UPDATEDATE
+		FROM TBL_REPLY
+		WHERE BNO = #{BNO}
+		AND RNO > 0
+		AND ROWNUM <= #{cri.pageNum} * #{cri.amount}
+		) WHERE RN > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getCountByBno" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) FROM TBL_REPLY WHERE BNO = #{bno}
+		]]>
 	</select>
 	
 	<select id="readRe" resultType="ReplyVO">

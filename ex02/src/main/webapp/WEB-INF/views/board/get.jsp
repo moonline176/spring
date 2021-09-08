@@ -110,6 +110,9 @@ let bno ="${board.bno}"
 	         }
 	      });      
 	   })
-
+	   
+	   
+	   
+	
 </script>
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

@@ -22,5 +22,8 @@ public interface BoardService {
 		//전체 조회
 		public List<BoardVO> getList(Criteria cri);
 		
-		public int getTotalCount(Criteria cri); 	
+		public int getTotalCount(Criteria cri); 
+		
+		//댓글 수 업데이트
+		public void updateReplycnt();
 }

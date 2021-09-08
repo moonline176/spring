@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yedam.app2.board.domain.Criteria;
+import com.yedam.app2.board.domain.ReplyPageVO;
 import com.yedam.app2.board.domain.ReplyVO;
 import com.yedam.app2.board.service.ReplyService;
 
@@ -27,7 +28,7 @@ public class ReplyRestController {
 
 	//해당 게시글의 댓글 조회
 	@GetMapping("/")
-	public List<ReplyVO> getList(Criteria cri, @RequestParam Long bno){
+	public ReplyPageVO getList(Criteria cri, @RequestParam Long bno){
 		return replyService.getList(cri, bno);
 	}
 	
@@ -59,5 +60,6 @@ public class ReplyRestController {
 		int r = replyService.deleteRe(vo);
 		return r == 1 ? true : false;
 	}
+	
 
 }

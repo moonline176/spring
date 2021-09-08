@@ -49,4 +49,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.getTotalCount(cri);
 	}
 
+	@Override
+	public void updateReplycnt() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
