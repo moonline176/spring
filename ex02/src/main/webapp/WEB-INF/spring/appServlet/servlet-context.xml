@@ -49,4 +49,9 @@
 	<tx:annotation-driven></tx:annotation-driven>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> <!-- 파일업로드 -->
+    	<beans:property name="maxUploadSize" value="2000000" />
+    	<beans:property name="maxInMemorySize" value="1000000" />
+	</beans:bean>
+	
 </beans:beans>

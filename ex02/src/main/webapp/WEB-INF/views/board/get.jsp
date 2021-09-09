@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="/WEB-INF/views/includes/header.jsp"%>
 <div>
 	<form role="form" action="/board/modify" method="get">
@@ -37,6 +38,11 @@
 			value="<fmt:formatDate pattern = "yyyy/MM/dd" value="${board.regdate}"/>"
 			readonly="readonly">
 	</div>
+	<div>
+		<c:forEach items="${board.attachList}" var="attach">
+			<a href="download?uuid=${attach.uuid}">${attach.fileName}</a>
+		</c:forEach>
+	</div>
 	<form action="modify" method="post">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
@@ -45,7 +51,9 @@
 			class="btn btn-default">수정</a> <a class="btn btn-success"
 			href="list?pageNum=${cri.pageNum}&amount=${cri.amount}">목록으로</a>
 	</form>
+
 </div>
+
 <!-- 댓글 등록 -->
 <div class="panel-heading">
 	<form id="replyForm">
@@ -65,54 +73,52 @@
 	</div>
 </div>
 <script src="../resources/js/reply.js">
+	
 </script>
 <script>
-let bno ="${board.bno}"
-	   $(function(){
-	      //등록처리
-	      $("#saveReply").on("click", function(){
-	         $.ajax({
-	            url : "../reply/", //method(or type):"get"
-	            method : "post",
-	            data :$("#replyForm").serialize(),
-	            dataType : "json",
-	            success : function(data){
-	               console.log(data);
-	               $(".chat").append ( makeLi(data) ) ;
-	            }
-	         
-	         })
-	      });
-	      
-	      //
-	      function makeLi(data){
-	         return '<li class="left clearfix">'
-	               + '   <div class="header">'
-	               + '      <strong class="primary-font">'+ data.replyer +'</strong>'
-	               + '         <small class="pull-right text-muted">'+data.replyDate +'</small>'
-	               + '      </div>'
-	               + '   <p>'+ data.reply +'</p>'
-	               + '   </li>   ';
-	      }
-	      
-	      //목록조회
-	      $.ajax({
-	         url: "../reply/", //method(or type):"get"
-	         data : {bno:bno} , //"bno=524295"
-	         dataType : "json", //응답결과가 json
-	         success: function(datas){
-	            console.log(datas);
-	            str = "";
-	            for(i=0; i<datas.length; i++){
-	               str += makeLi(datas[i]);
-	         }
-	         $('.chat').html(str);
-	         }
-	      });      
-	   })
-	   
-	   
-	   
-	
+	let bno = "${board.bno}"
+	$(function() {
+		//등록처리
+		$("#saveReply").on("click", function() {
+			$.ajax({
+				url : "../reply/", //method(or type):"get"
+				method : "post",
+				data : $("#replyForm").serialize(),
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					$(".chat").append(makeLi(data));
+				}
+
+			})
+		});
+
+		//
+		function makeLi(data) {
+			return '<li class="left clearfix">' + '   <div class="header">'
+					+ '      <strong class="primary-font">' + data.replyer
+					+ '</strong>'
+					+ '         <small class="pull-right text-muted">'
+					+ data.replyDate + '</small>' + '      </div>' + '   <p>'
+					+ data.reply + '</p>' + '   </li>   ';
+		}
+
+		//목록조회
+		$.ajax({
+			url : "../reply/", //method(or type):"get"
+			data : {
+				bno : bno
+			}, //"bno=524295"
+			dataType : "json", //응답결과가 json
+			success : function(datas) {
+				console.log(datas);
+				str = "";
+				for (i = 0; i < datas.length; i++) {
+					str += makeLi(datas[i]);
+				}
+				$('.chat').html(str);
+			}
+		});
+	})
 </script>
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

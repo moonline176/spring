@@ -2,6 +2,7 @@ package com.yedam.app2.board.service;
 
 import java.util.List;
 
+import com.yedam.app2.board.domain.BoardAttachVO;
 import com.yedam.app2.board.domain.BoardVO;
 import com.yedam.app2.board.domain.Criteria;
 
@@ -26,4 +27,7 @@ public interface BoardService {
 		
 		//댓글 수 업데이트
 		public void updateReplycnt();
+		
+		//첨부파일 단건조회
+		public BoardAttachVO attachRead(String uuid);
 }
