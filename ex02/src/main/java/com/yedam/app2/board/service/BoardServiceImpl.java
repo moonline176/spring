@@ -22,7 +22,7 @@ public class BoardServiceImpl implements BoardService {
 	public int insert(BoardVO vo) {
 		boardMapper.insert(vo); 
 		//첨부파일 등록
-		if(vo.getAttachList() != null) 
+		if(vo.getAttachList() == null) 
 			return 1;
 		
 		for( BoardAttachVO attach :vo.getAttachList()) {

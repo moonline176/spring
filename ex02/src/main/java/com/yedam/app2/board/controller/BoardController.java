@@ -74,29 +74,9 @@ public class BoardController {
 
 	// 등록
 	@PostMapping("/register")
-	public String register(BoardVO vo, RedirectAttributes rttr, MultipartFile[] uploadFile)
+	public String register(BoardVO vo, RedirectAttributes rttr)
 			throws IllegalStateException, IOException {
-		List<BoardAttachVO> list = new ArrayList<BoardAttachVO>();
-		String path = "c:/upload";
-		if (uploadFile != null) {
-			for (int i = 0; i < uploadFile.length; i++) {// 다중파일 보낼 때 for문 이용
-				MultipartFile ufile = uploadFile[i];
-				if (!ufile.isEmpty() && ufile.getSize() > 0) {
-					String filename = ufile.getOriginalFilename(); // 원본 파일명
-					UUID uuid = UUID.randomUUID();
-					File file = new File(path, uuid + filename); // 똑같은 파일이 다운로드 될 경우 덮어쓰기가 되기 때문에 이 점에 주의할 것!! -> 파일명
-																	// 구분
-					ufile.transferTo(file);
-					// 파일정보
-					BoardAttachVO attachvo = new BoardAttachVO();
-					attachvo.setUuid(uuid.toString());
-					attachvo.setFileName(filename);
-					attachvo.setUploadPath(path);
-					list.add(attachvo);
-				}
-			}
-		}
-		vo.setAttachList(list);
+		
 		boardService.insert(vo);
 
 		rttr.addFlashAttribute("result", vo.getBno());
