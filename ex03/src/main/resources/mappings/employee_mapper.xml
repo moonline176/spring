@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.employee.mapper.EmployeeMapper">
+	
+
+	<select id="getEmpList" resultType="EmployeeVO">
+		SELECT
+		*
+		FROM employees
+	</select>
+	
+	<select id="getEmp" parameterType="EmployeeVO" resultType="EmployeeVO">
+		SELECT
+		*
+		FROM employees
+		where
+			<choose>
+				<when test="email !=null and email !=''">
+					email = #{email}
+				</when>
+				<otherwise>employee_id = #{employeeId}</otherwise>
+			</choose>
+	</select>
+	
+	<insert id="insert">
+		insert into employees(EMPLOYEE_ID
+		FIRST_NAME,
+		LAST_NAME,
+		EMAIL,
+		PHONE_NUMBER,
+		HIRE_DATE,
+		JOB_ID,
+		SALARY,
+		COMMISSION_PCT,
+		MANAGER_ID,
+		DEPARTMENT_ID ) values (#{employeeId},
+		#{firstName},
+		#{lastName},
+		#{email},
+		#{phoneNumber},
+		#{hireDate},
+		#{jobId},
+		#{salary},
+		#{commissionPct},
+		#{managerId},
+		#{departmentId})
+	</insert>
+	
+	<delete id="delete">
+		delete from employees where EMPLOYEE_ID = #{employeeId}
+	</delete>
+	
+	<update id="update">
+		update employees set FIRST_NAME = #{firstName},
+		LAST_NAME = #{lastName},
+		EMAIL = #{email},
+		PHONE_NUMBER = #{phoneNumber},
+		HIRE_DATE = #{hireDate},
+		JOB_ID = #{jobId},
+		SALARY = #{salary},
+		COMMISSION_PCT = #{commissionPct},
+		MANAGER_ID = #{managerId},
+		DEPARTMENT_ID = #{departmentId}
+	</update>
+	
+	
+</mapper>
