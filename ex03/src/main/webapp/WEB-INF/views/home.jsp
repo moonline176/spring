@@ -7,6 +7,7 @@
 <body>
 <div>
 	<a href="/app/employee/elist">employee</a>
+	<a href="/app/dept">Dept</a>
 </div>
 </body>
 </html>

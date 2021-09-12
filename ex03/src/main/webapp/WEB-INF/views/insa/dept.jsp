@@ -15,10 +15,20 @@
 <body>
 	<h3>부서관리</h3>
 	<div id="list"></div>
+	<br>
+	<div>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#exampleModal">부서등록</button>
+	</div>
+	<br>
 
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#exampleModal">Launch demo modal</button>
+	<form id="update">
+		DEPARTMENT_ID<input id="departmentId" name="departmentId"><br />
+		DEPARTMENT_NAME<input id="departmentName" name="departmentName"><br />
+		MANAGER_ID<input id="managerId" name="managerId"><br />
+		LOCATION_ID<input id="locationId" name="locationId">
+	</form>
 
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -33,15 +43,16 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frm" action="insertDept" method="post">
-					DEPARTMENT_ID<input id="departmentId" name="departmentId"><br/>
-					DEPARTMENT_NAME<input id="departmentName" name="departmentName"><br/>
-					MANAGER_ID<input id="managerId" name="managerId"><br/>
-					LOCATION_ID<input id="locationId" name="locationId">
+					<form id="frm">
+						DEPARTMENT_ID<input id="departmentId2" name="departmentId"><br />
+						DEPARTMENT_NAME<input id="departmentName2" name="departmentName"><br />
+						MANAGER_ID<input id="managerId2" name="managerId"><br />
+						LOCATION_ID<input id="locationId2" name="locationId">
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"	data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary" id="btnRegister">등록</button>
 				</div>
 			</div>
@@ -51,32 +62,129 @@
 	<script type="text/javascript">
 		$(function() {
 			deptList();
-			//등록
-			$("#btnRegister").on("click",function(){
-				$('#frm').submit();
-				$('#exampleModal').modal('hide');
-			})
-			//수정
 
-			//목록 조회
-			function deptList() {
+			/* $("#frm").on("click",function(){
+								
+			} */
+			$("#frm").on("click", function(){
+				deptGet();
+			});
+			//단건조회
+			function deptGet(){
 				$.ajax({
-					url : "deptList",
+					url : "deptSearch",
 					dataType : "json",
-					success : function(datas) {
-						console.log(datas)
-						$.each(datas, function(i, data) {
-							$("<div>").append(
-									$("<span>").html(data.departmentId))
-									.append($("<span>").html(data.departmentName))
-									.appendTo($("#list"));
-						})
+					success : function(data){
+						console.log(data);
+						$("#departmentId2").text(data.departmentId);
+						$("#departmentName2").html(data.departmentName);
+						$("#managerId2").html(data.managerId);
+						$("#locationId2").html(data.locationId);
 					}
 				});
 			}
 
-			
-		})
+			//수정
+			function deptUpdate() {
+				$.ajax({
+					url : "deptUpdate",
+					type : "post",
+					dataType : "json",
+					data : JSON.stringify({
+						departmentId : $("#departmentId").val(),
+						departmentName : $("#departmentName").val(),
+						managerId : $("#managerId").val(),
+						locationId : $("#locationId").val()
+					}),
+					contentType : 'application/json',
+					success : function(datas) {
+						console.log(datas)
+						$("#exampleModal").modal('hide');
+						$("#list").empty();
+						deptList();
+					},
+					error : function(request, status, error) {
+						alert("code = " + request.status + " message = "
+								+ request.responseText + " error = " + error); // 실패 시 처리
+					}
+				});
+			}
+
+			//목록 조회
+			function deptList() {
+				$
+						.ajax({
+							url : "deptList",
+							dataType : "json",
+							success : function(datas) {
+								console.log(datas)
+								$
+										.each(
+												datas,
+												function(i, data) {
+													$("<div>")
+															.append(
+																	$("<span>")
+																			.html(
+																					data.departmentId))
+															.append(
+																	$("<span>")
+																			.html(
+																					" / "
+																							+ data.departmentName))
+															.append(
+																	$("<span>")
+																			.html(
+																					" / "
+																							+ data.managerId))
+															.append(
+																	$("<span>")
+																			.html(
+																					" / "
+																							+ data.locationId))
+															.appendTo(
+																	$("#list"));
+												})
+							}
+						});
+			}
+
+			//등록
+			$("#btnRegister").on(
+					"click",
+					function(e) {
+						e.preventDefault();
+						$.ajax({
+							url : "insertDept",
+							type : "post",
+							dataType : "json",
+							data : JSON.stringify({
+								departmentId : $("#departmentId").val(),
+								departmentName : $("#departmentName").val(),
+								managerId : $("#managerId").val(),
+								locationId : $("#locationId").val()
+							}),
+							contentType : 'application/json',
+							/* data : $("#frm").serialize(), */
+							success : function(data) {
+								console.log(data);
+								$("#exampleModal").modal('hide');
+								/* if(data.result == true){
+									$("#exampleModal").modal('hide');
+									deptList();
+								} */
+								$("#list").empty();
+								deptList();
+							},
+							error : function(request, status, error) {
+								alert("code = " + request.status
+										+ " message = " + request.responseText
+										+ " error = " + error); // 실패 시 처리
+							}
+						});
+					});
+
+		});
 	</script>
 </body>
 </html>

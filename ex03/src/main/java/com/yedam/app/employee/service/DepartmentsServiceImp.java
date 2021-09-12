@@ -24,4 +24,22 @@ public class DepartmentsServiceImp implements DepartmentsService {
 		return departMapper.insertDept(vo);
 	}
 
+	@Override
+	public int updateDept(DepartmentsVO vo) {
+		// TODO Auto-generated method stub
+		return departMapper.updateDept(vo);
+	}
+
+	@Override
+	public int deleteDept(DepartmentsVO vo) {
+		// TODO Auto-generated method stub
+		return departMapper.deleteDept(vo);
+	}
+
+	@Override
+	public DepartmentsVO getDept(DepartmentsVO vo) {
+		// TODO Auto-generated method stub
+		return departMapper.getDept(vo);
+	}
+
 }

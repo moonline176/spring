@@ -41,6 +41,14 @@ public class EmployeeController {
 		map.put("depts", departmentService.getDeptList());
 		return map;
 	}
+	
+	// 삭제
+		@DeleteMapping("/{employeeId}")
+		public boolean delete(@PathVariable int employeeId, EmployeeVO vo) {
+			vo.setEmployeeId(employeeId);
+			int r = employeeService.delete(vo);
+			return r == 1 ? true : false;
+		}
 
 	// 등록폼
 	@GetMapping("insertEmp")
@@ -86,13 +94,7 @@ public class EmployeeController {
 		return "insa/empSearch";
 	}
 
-	// 삭제
-	@DeleteMapping("/{employeeId}")
-	public boolean delete(@PathVariable int employeeId, EmployeeVO vo) {
-		vo.setEmployeeId(employeeId);
-		int r = employeeService.delete(vo);
-		return r == 1 ? true : false;
-	}
+	
 
 	// 사원검색
 	@RequestMapping("empSearch2")

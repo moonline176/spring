@@ -46,6 +46,7 @@ public class RestfulUserController {
 		result.put("result", Boolean.TRUE);
 		return result;
 	}
+	
 	//등록
 	@RequestMapping(value="/users"
 			,method=RequestMethod.POST
@@ -59,7 +60,7 @@ public class RestfulUserController {
 	}
 	
 	//수정
-	@RequestMapping(value="/users"
+	@RequestMapping(value="/users" //requsetMapping + data : json.stringify 는 세트
 			,method=RequestMethod.PUT
 	//		,produces="application/json"      //응답헤더
 	 		,consumes="application/json"      //요청헤더
