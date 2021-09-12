@@ -7,9 +7,9 @@
 		ORDER BY DEPARTMENT_ID
 	</select>
 	
-	<select id="getDept">
-		select * from departments
-		where DEPARTMENT_ID = #{departmentId}
+	<select id="getDept" resultType="DepartmentsVO">
+		SELECT * FROM DEPARTMENTS
+		WHERE DEPARTMENT_ID = #{departmentId}
 	</select>
 	
 	<insert id="insertDept">
@@ -28,11 +28,11 @@
 	</insert>
 	
 	<update id="updateDept">
-		update department set
-		DEPARTMENT_ID = #{departmentId},
+		UPDATE DEPARTMENTS SET
 		DEPARTMENT_NAME = #{departmentName},
 		MANAGER_ID = #{managerId},
 		LOCATION_ID = #{locationId}
+		WHERE DEPARTMENT_ID = #{departmentId}
 	</update>
 	
 	<delete id="deleteDept">

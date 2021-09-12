@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.app.employee.domain.DepartmentsVO;
@@ -29,20 +31,20 @@ public class DeptController {
 	}
 
 	// 단건조회
-	@GetMapping("deptSearch")
-	@ResponseBody
-	public DepartmentsVO deptSearch(@RequestBody DepartmentsVO vo) {
-		departmentsService.getDept(vo);
+	@GetMapping("/{departmentId}")
+	public DepartmentsVO getDept(@PathVariable int departmentId,DepartmentsVO vo) {
+		vo.setDepartmentId(departmentId);
+		System.out.println(departmentsService.getDept(vo)); 
 		return vo;
 	}
 
 	// 삭제
-	@DeleteMapping("/{deleteDept}")
-	public boolean deletDept(@PathVariable int departmentId, DepartmentsVO vo) {
-		vo.setDepartmentId(departmentId);
-		int r = departmentsService.deleteDept(vo);
-		return r == 1 ? true : false;
-	}
+//	@DeleteMapping("/{departmentId}")
+//	public boolean deletDept(@PathVariable int departmentId, DepartmentsVO vo) {
+//		vo.setDepartmentId(departmentId);
+//		int r = departmentsService.deleteDept(vo);
+//		return r == 1 ? true : false;
+//	}
 
 	// ajax : 목록, 등록, 수정, 삭제 --> responsebody 필요
 	@GetMapping("deptList")
