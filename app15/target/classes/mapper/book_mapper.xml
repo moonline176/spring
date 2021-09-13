@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.app.mapper.BookMapper">
+	
+	<!-- 전체조회 -->
+	<select id="getList" resultType="com.book.app.domain.BookVO">
+		select * from BOOK_TBL_06
+	</select>
+	
+	<!-- 단건 조회 -->
+	<select id="read" resultType="com.book.app.domain.BookVO">
+		SELECT * FROM BOOK_TBL_06 
+		WHERE BOOK_NO = #{bookNo}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insert">
+		insert into book_tbl_06(
+				BOOK_NO,
+				BOOK_NAME,
+				BOOK_COVERIMG,
+				BOOK_DATE,
+				BOOK_PRICE,
+				BOOK_PUBLISHER,
+				BOOK_INFO
+		) values (
+		BOOK_SEQ.nextval,
+		#{bookName},
+		#{bookCoverimg},
+		#{bookDate},
+		#{bookPrice},
+		#{bookPublisher},
+		#{bookInfo}
+		)
+	</insert>
+	<!-- BOOK_SEQ.nextval 시작값 105로 시작하는 시퀸스 작성  -->
+	
+	<!-- 수정 -->
+	<update id="update">
+		update book_tbl_06 set
+				BOOK_NAME = #{bookName},
+				BOOK_COVERIMG = #{bookCoverimg},
+				BOOK_DATE = #{bookDate},
+				BOOK_PRICE = #{bookPrice},
+				BOOK_PUBLISHER = #{bookPublisher},
+				BOOK_INFO = #{bookInfo}
+		where BOOK_NO = #{bookNo}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delete">
+		delete from book_tbl_06 where book_no = #{bookNo}
+	</delete>
+</mapper>

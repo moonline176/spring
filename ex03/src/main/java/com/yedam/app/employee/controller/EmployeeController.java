@@ -72,6 +72,13 @@ public class EmployeeController {
 		return vo;
 	}
 
+	//목록조회
+	@RequestMapping("empList")
+	public String empList(Model model,EmployeeVO vo) {
+		model.addAttribute("list", employeeService.getEmpList());
+		return "no/insa/emplist";
+	}
+	
 	// 수정
 	@PutMapping("/")
 	public EmployeeVO update(@RequestBody EmployeeVO vo) {

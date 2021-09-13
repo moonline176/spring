@@ -39,12 +39,12 @@ public class DeptController {
 	}
 
 	// 삭제
-//	@DeleteMapping("/{departmentId}")
-//	public boolean deletDept(@PathVariable int departmentId, DepartmentsVO vo) {
-//		vo.setDepartmentId(departmentId);
-//		int r = departmentsService.deleteDept(vo);
-//		return r == 1 ? true : false;
-//	}
+	@DeleteMapping("/dept/{departmentId}")
+	public int deletDept(@PathVariable int departmentId, DepartmentsVO vo) {
+		vo.setDepartmentId(departmentId);
+		int r = departmentsService.deleteDept(vo);
+		return r;
+	}
 
 	// ajax : 목록, 등록, 수정, 삭제 --> responsebody 필요
 	@GetMapping("deptList")
@@ -78,5 +78,11 @@ public class DeptController {
 		departmentsService.updateDept(vo);
 		return vo;
 	}
+	
+	// 1명 조회  --> 단건 조회 예시
+//		@GetMapping("/users/{userid}")
+//		public UserVO user(@PathVariable String userid) {
+//			return dao.getUser(userid);
+//		}
 
 }

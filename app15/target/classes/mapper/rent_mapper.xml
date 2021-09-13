@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.app.mapper.RentMapper">
+	<select id="getListR" resultType="com.book.app.domain.RentVO">
+		SELECT  R.RENT_NO,
+				R.BOOK_NO,
+				R.RENT_PRICE,
+				(select count(*) from rent_tbl_06
+		group by book_no)
+		FROM RENT_TBL_06 R
+		JOIN BOOK_TBL_06 B
+		ON B.BOOK_NO = R.BOOK_NO;
+	</select>
+</mapper>
