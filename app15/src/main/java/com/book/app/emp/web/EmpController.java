@@ -25,14 +25,6 @@ public class EmpController {
     @Autowired
     EmpService empService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(Locale locale, Model model) {
-        logger.info("Welcome home! The client locale is {}.", locale);
-
-        model.addAttribute("serverTime", new Date());
-
-        return "home";
-    }
 
     @RequestMapping(value = "/emp", method = RequestMethod.GET)
     public String emp(Locale locale, Model model, EmpVO empVO) {

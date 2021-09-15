@@ -18,6 +18,6 @@
 	
 	<!-- ㅡmapper scan -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-	  <property name="basePackage" value="com.dbal.**.mapper" />
+	  <property name="basePackage" value="com.**.mapper" />
 	</bean>
 </beans>

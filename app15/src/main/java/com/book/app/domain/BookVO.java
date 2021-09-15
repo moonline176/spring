@@ -11,7 +11,7 @@ public class BookVO{
 	private int bookNo;
 	private String bookName;
 	private String bookCoverimg;
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date bookDate;
 	private int bookPrice;
 	private String bookPublisher;

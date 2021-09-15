@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
-<body>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<jsp:include page="include/header.jsp" />
 	<table border="1">
 		<tr>
 			<th>도서번호</th>
@@ -15,12 +10,13 @@
 			<th>대여총계</th>
 			<th>대여횟수</th>
 		</tr>
-		<tr>
-			<td>${rlist.bookNo}</td>
-			<td>${rlist.bookName}</td>
-			<td>${rlist.rentPrice}</td>
-			<td>${rlist.rentStatus}</td>
-		</tr>
+		<c:forEach items="${list}" var="rent">
+			<tr>
+				<td>${rent.bookNo}</td>
+				<td>${rent.bookName}</td>
+				<td>${rent.rentPrice}</td>
+				<td>${rent.rentStatus}</td>
+			</tr>
+		</c:forEach>
 	</table>
-</body>
-</html>
+<jsp:include page="include/footer.jsp" />

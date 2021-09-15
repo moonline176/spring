@@ -2,19 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-	<header>도서대여관리</header>
-	<nav>
-		<a href="/app/bookinsert">도서 등록</a>
-		<a href="/app/bookList">도서목록조회/수정</a>
-		<a href="/app/bookrent.jsp">대여현황조회</a>
-		<a href="/app/bookRent">홈으로</a>
-	</nav>
+<jsp:include page="include/header.jsp" />
 	<div>
 		<h1>도서대여관리 프로그램</h1>
 	</div>
@@ -32,8 +20,4 @@
 			<li>6. 대여 정보 조회 프로그램을 작성한다.</li>
 		</ul> 
 	</div>
-	<footer>
-		HRDKOREA Copyright(C) 2016 ALL right reserved. Human Resources Development Service of Korea
-	</footer>
-</body>
-</html>
+<jsp:include page="include/footer.jsp" />

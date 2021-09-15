@@ -1,18 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
-<body>
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<jsp:include page="include/header.jsp" />
 	<div>
 		<h1>도서 조회/수정</h1>
 	</div>
 	<div>
-		<table>
+		<table border="1">
 			<thead>
 				<tr>
 					<th>도서번호</th>
@@ -25,17 +20,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>${list.bookNo}</td>
-					<td>${list.bookName}</td>
-					<td>${list.bookCoverimg}</td>
-					<td>${list.bookDate}</td>
-					<td>${list.bookPrice}</td>
-					<td>${list.bookPublisher}</td>
-					<td>${bookInfo}</td>
-				</tr>
-			</tbody>			
+				<c:forEach items="${list}" var="book">
+					<tr>
+						<td>${book.bookNo}</td>
+						<td>${book.bookName}</td>
+						<td>${book.bookCoverimg}</td>
+						<td>${book.bookDate}</td>
+						<td>${book.bookPrice}</td>
+						<td>${book.bookPublisher}</td>
+						<td>${book.bookInfo}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 	</div>
-</body>
-</html>
+<jsp:include page="include/footer.jsp" />
